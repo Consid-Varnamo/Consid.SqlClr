@@ -9,10 +9,10 @@ using System.Xml;
 
 namespace SqlClr
 {
-    public class Procedures
+    public partial class StoredProcedures
     {
         [SqlProcedure]
-        public void OutputXml(SqlXml xmlData, SqlString fileName)
+        public static void OutputXml(SqlXml xmlData, SqlString fileName)
         {
             XmlDocument doc = new XmlDocument();
             SqlPipe output = SqlContext.Pipe;
@@ -29,6 +29,11 @@ namespace SqlClr
             }
         }
 
+        [SqlProcedure]
+        public static void HelloWorld()
+        {
+            SqlContext.Pipe.Send("Hello world!");
+        }
 
     }
 }

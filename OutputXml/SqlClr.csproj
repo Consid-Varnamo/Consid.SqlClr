@@ -46,6 +46,8 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Sql\create assembly SqlClr.sql" />
+    <Content Include="Sql\create procedure ExportCatalogXml.sql" />
+    <Content Include="Sql\ExportCatalogXml example.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
