@@ -34,12 +34,12 @@ if OBJECT_ID(N'XmlToFile', N'PC') is not null
 
 go
 
-if exists(select * from sys.assemblies where name = 'SqlClr')
-	drop assembly SqlClr
+if exists(select * from sys.assemblies where name = 'Consid.SqlClr')
+	drop assembly [Consid.SqlClr]
 
 go
 
-declare @debug bit = 1
+declare @debug bit = 0
 declare @assemblyPath nvarchar(256)
 declare @assemblySql nvarchar(512)
 
@@ -49,13 +49,13 @@ else
 	set @assemblyPath = 'D:\users\chrhei\documents\visual studio 2013\Projects\SQLCLR\OutputXML\bin\Release\Consid.SqlClr.dll'
 
 
-set @assemblySql = 'create assembly SqlClr from ''' + @assemblyPath + ''' with permission_set = unsafe'
+set @assemblySql = 'create assembly [Consid.SqlClr] from ''' + @assemblyPath + ''' with permission_set = unsafe'
 exec sp_executesql @assemblySql
 
 go
 
 create procedure XmlToFile(@data xml, @filename nvarchar(512)) 
-as external name [SqlClr].[Consid.SqlClr.StoredProcedures].XmlToFile
+as external name [Consid.SqlClr].[Consid.SqlClr.StoredProcedures].XmlToFile
 
 go
 
