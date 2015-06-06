@@ -7,8 +7,8 @@
     <ProjectGuid>{65B14140-404F-4A3B-B3B4-6007380A4086}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SqlClr</RootNamespace>
-    <AssemblyName>SqlClr</AssemblyName>
+    <RootNamespace>Consid.SqlClr</RootNamespace>
+    <AssemblyName>Consid.SqlClr</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

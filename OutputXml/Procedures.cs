@@ -8,7 +8,7 @@ using System.Xml;
 
 
 
-namespace SqlClr
+namespace Consid.SqlClr
 {
     public partial class StoredProcedures
     {
@@ -28,7 +28,7 @@ namespace SqlClr
 
                 sw.Stop();
 
-                output.Send(string.Format("The file {0} was saved sucessfully created ({1}).", fileName, sw.Elapsed));
+                output.Send(string.Format("The file '{0}' was sucessfully created({1}).", fileName, sw.Elapsed));
             }
             catch (Exception e)
             {

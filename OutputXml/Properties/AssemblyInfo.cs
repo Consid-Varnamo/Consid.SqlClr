@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SqlClr")]
+[assembly: AssemblyTitle("Consid.SqlClr")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Consid AB")]
-[assembly: AssemblyProduct("SqlClr")]
+[assembly: AssemblyProduct("Consid.SqlClr")]
 [assembly: AssemblyCopyright("Copyright © Consid AB 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

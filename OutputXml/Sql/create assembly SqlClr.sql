@@ -40,13 +40,13 @@ if exists(select * from sys.assemblies where name = 'SqlClr')
 go
 
 create assembly SqlClr 
-from 'D:\users\chrhei\documents\visual studio 2013\Projects\SQLCLR\OutputXML\bin\Release\SqlClr.dll'
+from 'D:\users\chrhei\documents\visual studio 2013\Projects\SQLCLR\OutputXML\bin\Release\Consid.SqlClr.dll'
 with permission_set = unsafe
 
 go
 
 create procedure XmlToFile(@data xml, @filename nvarchar(512)) 
-as external name [SqlClr].[SqlClr.StoredProcedures].XmlToFile
+as external name [SqlClr].[Consid.SqlClr.StoredProcedures].XmlToFile
 
 go
 
