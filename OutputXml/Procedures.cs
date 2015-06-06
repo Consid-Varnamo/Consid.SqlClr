@@ -24,6 +24,10 @@ namespace Consid.SqlClr
             try
             {
                 doc.LoadXml(xmlData.Value);
+
+                XmlDeclaration declaration  = doc.CreateXmlDeclaration("1.0", "utf-8", null);
+                doc.InsertBefore(declaration, doc.DocumentElement);
+
                 doc.Save(fileName.Value);
 
                 sw.Stop();

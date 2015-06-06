@@ -39,9 +39,18 @@ if exists(select * from sys.assemblies where name = 'SqlClr')
 
 go
 
-create assembly SqlClr 
-from 'D:\users\chrhei\documents\visual studio 2013\Projects\SQLCLR\OutputXML\bin\Release\Consid.SqlClr.dll'
-with permission_set = unsafe
+declare @debug bit = 1
+declare @assemblyPath nvarchar(256)
+declare @assemblySql nvarchar(512)
+
+if @debug = 1
+	set @assemblyPath = 'D:\users\chrhei\documents\visual studio 2013\Projects\SQLCLR\OutputXML\bin\Debug\Consid.SqlClr.dll'
+else
+	set @assemblyPath = 'D:\users\chrhei\documents\visual studio 2013\Projects\SQLCLR\OutputXML\bin\Release\Consid.SqlClr.dll'
+
+
+set @assemblySql = 'create assembly SqlClr from ''' + @assemblyPath + ''' with permission_set = unsafe'
+exec sp_executesql @assemblySql
 
 go
 
