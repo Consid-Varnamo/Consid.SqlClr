@@ -8,7 +8,7 @@ set @output = (select
 			c.DefaultLanguage [@defaultLanguage],
 			c.WeightBase [@weightBase],
 			c.DefaultCurrency [@defaultCurrency],
-			c.EndDate [@endDate],
+			Convert(datetime,'2199-01-01',127) [@endDate], --c.EndDate [@endDate],
 			c.StartDate [@startDate],
 			c.Modified [@lastmodified],
 			c.Name [@name],
@@ -126,7 +126,7 @@ set @output = (select
 						-- Entry
 						select
 							ce.StartDate,
-							ce.EndDate,
+							Convert(datetime,'2199-01-01',127) EndDate, --ce.EndDate,
 							ce.Name,
 							case ce.IsActive when 1 then 'True' else 'False' end IsActive,
 							'Entry' [EntryType],
