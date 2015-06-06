@@ -29,8 +29,8 @@ go
 
 use dbBokrondellenCommerce_Upgrade
 
-if OBJECT_ID(N'OutputXml', N'PC') is not null
-	drop procedure OutputXml
+if OBJECT_ID(N'XmlToFile', N'PC') is not null
+	drop procedure XmlToFile
 
 go
 
@@ -45,8 +45,8 @@ with permission_set = unsafe
 
 go
 
-create procedure OutputXml(@data xml, @filename nvarchar(512)) 
-as external name [SqlClr].[SqlClr.StoredProcedures].OutputXml
+create procedure XmlToFile(@data xml, @filename nvarchar(512)) 
+as external name [SqlClr].[SqlClr.StoredProcedures].XmlToFile
 
 go
 
