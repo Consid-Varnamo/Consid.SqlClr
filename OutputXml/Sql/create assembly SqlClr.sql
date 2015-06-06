@@ -53,5 +53,3 @@ go
 alter authorization on database::dbBokrondellenCommerce_Upgrade to sa
 
 go
-
--- select name, suser_sname(owner_sid) from sys.databases where name = 'dbBokrondellenCommerce_Upgrade'
