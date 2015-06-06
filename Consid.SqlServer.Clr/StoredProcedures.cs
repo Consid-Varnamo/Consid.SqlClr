@@ -1,6 +1,8 @@
 using Microsoft.SqlServer.Server;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.Text;
@@ -14,7 +16,7 @@ namespace Consid.SqlServer.Clr
         public static void XmlToFile(SqlXml xmlData, SqlString fileName)
         {
             XmlDocument doc = new XmlDocument();
-            SqlPipe output = SqlContext.Pipe;
+            SqlPipe pipe = SqlContext.Pipe;
 
             Stopwatch sw = new Stopwatch();
             sw.Start();
@@ -30,11 +32,39 @@ namespace Consid.SqlServer.Clr
 
                 sw.Stop();
 
-                output.Send(string.Format("The file '{0}' was sucessfully created({1}).", fileName, sw.Elapsed));
+                pipe.Send(string.Format("The file '{0}' was sucessfully created({1}).", fileName, sw.Elapsed));
             }
             catch (Exception e)
             {
-                output.Send(e.Message);
+                pipe.Send(e.Message);
+            }
+        }
+
+        [SqlProcedure]
+        public static void ExportCatalogNode (SqlString catalogNodeCode, SqlString fileName)
+        {
+            SqlPipe pipe = SqlContext.Pipe;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection("context connection=true"))
+                {
+                    SqlCommand cmd = new SqlCommand("CreateCatalogExportXml", conn);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add(new SqlParameter("@CatalogNodeCode", SqlDbType.NVarChar) { Value = catalogNodeCode.Value });
+                    SqlParameter output = cmd.Parameters.Add(new SqlParameter("@Output", SqlDbType.Xml) { Value = catalogNodeCode.Value });
+                    output.Direction = ParameterDirection.Output;
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                    XmlToFile((SqlXml)output.SqlValue, fileName);
+                }
+            }
+            catch (Exception e)
+            {
+                pipe.Send(e.Message);
             }
         }
     }

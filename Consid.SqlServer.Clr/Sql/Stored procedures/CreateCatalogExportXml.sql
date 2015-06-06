@@ -1,5 +1,5 @@
-﻿create procedure CreateCatalogExportXml @CatalogNodeCode nvarchar(20), @output xml output as
-set @output = (select 
+﻿create procedure CreateCatalogExportXml @CatalogNodeCode nvarchar(20), @Output xml output as
+set @Output = (select 
 	1.0 [@Version],
 	(
 		select
