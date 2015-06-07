@@ -92,7 +92,25 @@ namespace Consid.SqlServer.Clr
                     cmd.ExecuteNonQuery();
                     conn.Close();
 
-                    SendMessage("{0} Entries loaded sucessfully.", sw.Elapsed);
+                    XmlReader reader = ((SqlXml)output.SqlValue).CreateReader();
+                    string entryCount = null;
+                    string nodeCount = null;
+
+                    reader.ReadToFollowing("Nodes");
+                    if (reader.HasAttributes)
+                    {
+                        reader.MoveToFirstAttribute();
+                        nodeCount = reader.Value;
+                    }
+
+                    reader.ReadToFollowing("Entries");
+                    if (reader.HasAttributes)
+                    {
+                        reader.MoveToFirstAttribute();
+                        entryCount = reader.Value;
+                    }
+
+                    SendMessage(new PluralFormatProvider(), "{0} Entries loaded sucessfully. Found {1:entry;entries} in {2:node;nodes}.", sw.Elapsed, entryCount, nodeCount);
                     SendMessage("{0} Creating xml file...", sw.Elapsed);
 
                     XmlToFile((SqlXml)output.SqlValue, xmlFileName);
@@ -153,18 +171,27 @@ namespace Consid.SqlServer.Clr
 
         private static void SendMessage(string format, params object[] args)
         {
-            string msg = string.Format(format, args);
+            SendMessage(null, format, args);
+        }
+
+        private static void SendMessage(IFormatProvider provider, string format, params object[] args)
+        {
+            string msg;
+            if (provider == null)
+                msg = string.Format(format, args);
+            else
+                msg = string.Format(provider, format, args);
 
             using (SqlConnection conn = new SqlConnection("context connection=true"))
             {
-                SqlCommand cmd = new SqlCommand(String.Format("raiserror(N'{0}', 0, 0) with nowait", msg), conn);
+                SqlCommand cmd;
                 
+                cmd = new SqlCommand(String.Format("raiserror(N'{0}', 0, 0) with nowait", msg), conn);
+
                 conn.Open();
                 SqlContext.Pipe.ExecuteAndSend(cmd);
 
             }
-
-
         }
     }
 }
