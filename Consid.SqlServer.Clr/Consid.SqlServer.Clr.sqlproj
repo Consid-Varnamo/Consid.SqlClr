@@ -29,8 +29,9 @@
     <Recovery>SIMPLE</Recovery>
     <Trustworthy>True</Trustworthy>
     <DacVersion>1.3.0.0</DacVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
-    <GenerateCreateScript>True</GenerateCreateScript>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <GenerateCreateScript>False</GenerateCreateScript>
     <CompatibilityMode>100</CompatibilityMode>
     <DefaultCollation>Finnish_Swedish_100_CI_AS</DefaultCollation>
   </PropertyGroup>
@@ -75,6 +76,12 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\References\ICSharpCode.SharpZipLib.dll</HintPath>
+      <GenerateSqlClrDdl>True</GenerateSqlClrDdl>
+      <IsModelAware>True</IsModelAware>
+      <SqlPermissionSet>UNSAFE</SqlPermissionSet>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,9 +89,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Consid.SqlServer.Clr.publish.xml" />
+    <None Include="Sql\Queries\drop-all.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Sql\Stored procedures\CreateCatalogExportXml.sql" />
+    <None Include="Sql\Stored procedures\CreateCatalogExportXml.sql" />
     <None Include="Sql\Queries\ExportCatalogXml example.sql" />
   </ItemGroup>
   <ItemGroup>
